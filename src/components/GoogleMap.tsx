@@ -14,7 +14,6 @@ export interface GoogleMapProps {
     options?: google.maps.MapOptions;
     center?: google.maps.LatLngLiteral;
     zoom?: number;
-
     onClick?: (e: google.maps.MouseEvent) => void;
     onDrag?: () => void;
     onDragEnd?: () => void;

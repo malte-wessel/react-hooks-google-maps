@@ -1,5 +1,6 @@
 import { around } from 'geokdbush';
 import { Cluster, ClusterStrategyResult, Clusterable } from '../types';
+import { xy2d } from './xy2d';
 
 const ZOOM_TABLE: number[] = [
     Infinity,
@@ -47,9 +48,10 @@ export const defaultClustererStrategy = <T>(
             const item = items[i];
             const itemId = getId(item);
             const position = getPosition(item);
+            const isVisible = bounds.contains(position);
 
             // Skip if item already belongs to a cluster
-            if (!added[itemId]) {
+            if (!added[itemId] && isVisible) {
                 const candidates = around(
                     tree,
                     position.lng,
@@ -60,7 +62,7 @@ export const defaultClustererStrategy = <T>(
 
                 // candidates will include the item itself, so we check for > 1
                 if (candidates.length > 1) {
-                    const bounds = new google.maps.LatLngBounds();
+                    const clusterBounds = new google.maps.LatLngBounds();
                     const clusterIds: string[] = [];
 
                     for (let j = 0, jl = candidates.length; j < jl; j++) {
@@ -69,8 +71,8 @@ export const defaultClustererStrategy = <T>(
                         // Skip if candidate already belongs to a cluster
                         if (added[candidateId]) continue;
                         const candidatePosition = getPosition(candidate);
-                        // Extend cluster bounds by the candidates position
-                        bounds.extend(candidatePosition);
+                        // Extend clusterBounds by the candidates position
+                        clusterBounds.extend(candidatePosition);
                         // Add id to cluster
                         clusterIds.push(candidateId);
                     }
@@ -80,12 +82,16 @@ export const defaultClustererStrategy = <T>(
                         for (let k = 0, kl = clusterIds.length; k < kl; k++) {
                             added[clusterIds[k]] = true;
                         }
-                        const clusterPosition = bounds.getCenter().toJSON();
-                        const clusterBounds = bounds.toJSON();
+                        const clusterPosition = clusterBounds.getCenter();
                         clusters.push({
+                            id: xy2d(
+                                clusterPosition.lat(),
+                                clusterPosition.lng()
+                            ),
                             ids: clusterIds,
-                            position: clusterPosition,
-                            bounds: clusterBounds,
+                            isVisible: bounds.contains(clusterPosition),
+                            position: clusterPosition.toJSON(),
+                            bounds: clusterBounds.toJSON(),
                         });
                     }
                 }
@@ -93,7 +99,8 @@ export const defaultClustererStrategy = <T>(
 
             // At this point we know if the item will be part of a cluster or not
             clusterables[i] = {
-                isVisible: !added[itemId],
+                isVisible,
+                isClustered: !!added[itemId],
                 position,
                 item: item,
             };

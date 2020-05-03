@@ -3,6 +3,7 @@ import { PaneName } from '../types';
 export interface GoogleMapsOverlayViewExtended extends google.maps.OverlayView {
     onReady: (callback: () => void) => () => void;
     setPosition: (position: google.maps.LatLngLiteral) => void;
+    setPaneName: (paneName: PaneName) => void;
 }
 
 // We need to wrap the class creation into a factory function
@@ -70,6 +71,9 @@ export const createOverlayView = (
         }
         setPosition(position: google.maps.LatLngLiteral) {
             this.position = position;
+        }
+        setPaneName(paneName: PaneName) {
+            this.paneName = paneName;
         }
     }
     return new OverlayView(container, paneName, position);

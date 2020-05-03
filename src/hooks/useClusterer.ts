@@ -1,8 +1,10 @@
-import { useMemo, useState, useCallback, useEffect, useRef } from 'react';
+import { useMemo, useState, useCallback, useEffect } from 'react';
 import KDBush from 'kdbush';
+
 import { defaultClustererStrategy } from '../util/defaultClustererStrategy';
 import { Cluster, Clusterable, UseClustererOptions } from '../types';
 import { useGoogleMapsEvent } from './useGoogleMapsEvent';
+import { useCurrent } from './useCurrent';
 
 export interface UseClustererState<T> {
     clusters: Cluster[];
@@ -18,11 +20,7 @@ export const useClusterer = <T>(
         clusters: [],
         clusterables: [],
     });
-    const optionsRef = useRef(options);
-    useEffect(() => {
-        optionsRef.current = options;
-    }, [options]);
-
+    const optionsRef = useCurrent(options);
     const tree = useMemo(() => {
         const { getPosition } = optionsRef.current;
         return new KDBush<T>(
@@ -54,6 +52,7 @@ export const useClusterer = <T>(
     // update when map zoom changed
     const handleMapChange = useCallback(() => update(), [update]);
     useGoogleMapsEvent(map, 'zoom_changed', handleMapChange);
+    useGoogleMapsEvent(map, 'idle', handleMapChange);
 
     return {
         items: state.clusterables,

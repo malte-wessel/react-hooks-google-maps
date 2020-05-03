@@ -937,14 +937,12 @@
 "@types/geokdbush@^1.1.2":
   version "1.1.2"
   resolved "https://registry.yarnpkg.com/@types/geokdbush/-/geokdbush-1.1.2.tgz#143b9e891f83259b54d1885691e77ebfda3f8e2f"
-  integrity sha512-NSMl27OjVE9jY8IaGKcvRRU53vyo5g2IxdVB7CIauo+dpuRF6JPnoTIHb9stCvu0AFCEDWC7XqL4IgTcDrBmHQ==
   dependencies:
     "@types/kdbush" "^1"
 
 "@types/googlemaps@^3.39.4":
   version "3.39.4"
   resolved "https://registry.yarnpkg.com/@types/googlemaps/-/googlemaps-3.39.4.tgz#c32ec3bb1481e53a7282598f7fa96a75bc834139"
-  integrity sha512-R11RyCccERJhqSXlePFdoOXbWiTsY3H17Wl5e+JEpJFBXl8P+0Rm+JP8eqqSqOCtZjXDlYeKKnhE8a4VZlhtTw==
 
 "@types/istanbul-lib-coverage@*", "@types/istanbul-lib-coverage@^2.0.0":
   version "2.0.1"
@@ -976,12 +974,10 @@
 "@types/kdbush@^1":
   version "1.0.3"
   resolved "https://registry.yarnpkg.com/@types/kdbush/-/kdbush-1.0.3.tgz#39078fce100237180c900357bfaa69e39960439d"
-  integrity sha512-lXIQSkfJSMnJgRPI4eAdUdxZZ9bGTipXkysoorfN3Ac6o1xr2Nfkxyi4p6VXLhz7S3si+ILRGdTrPlSfu12OqA==
 
 "@types/kdbush@^3.0.0":
   version "3.0.0"
   resolved "https://registry.yarnpkg.com/@types/kdbush/-/kdbush-3.0.0.tgz#ba9a14305ebb9fc5770dc5731f272bd9fa67fb18"
-  integrity sha512-G7c8tWLneqgHLXqm1DKj6D7+kPPTSd9cRa5LKVgt61/kYY3enSDiS3V/yeJ8VHA4fW1bzRxfnXUYTOszolv0OA==
 
 "@types/node@*":
   version "13.13.4"
@@ -2389,6 +2385,13 @@ gensync@^1.0.0-beta.1:
   version "1.0.0-beta.1"
   resolved "https://registry.yarnpkg.com/gensync/-/gensync-1.0.0-beta.1.tgz#58f4361ff987e5ff6e1e7a210827aa371eaac269"
 
+geokdbush@^1.1.0:
+  version "1.1.0"
+  resolved "https://registry.yarnpkg.com/geokdbush/-/geokdbush-1.1.0.tgz#aa5e8e7953a6594b40a85fbdb61059af0f51468f"
+  integrity sha1-ql6OeVOmWUtAqF+9thBZrw9RRo8=
+  dependencies:
+    tinyqueue "^1.2.2"
+
 get-caller-file@^2.0.1:
   version "2.0.5"
   resolved "https://registry.yarnpkg.com/get-caller-file/-/get-caller-file-2.0.5.tgz#4f94412a82db32f36e3b0b9741f8a97feb031f7e"
@@ -3313,6 +3316,11 @@ jsx-ast-utils@^2.2.1, jsx-ast-utils@^2.2.3:
   dependencies:
     array-includes "^3.0.3"
     object.assign "^4.1.0"
+
+kdbush@^3.0.0:
+  version "3.0.0"
+  resolved "https://registry.yarnpkg.com/kdbush/-/kdbush-3.0.0.tgz#f8484794d47004cc2d85ed3a79353dbe0abc2bf0"
+  integrity sha512-hRkd6/XW4HTsA9vjVpY9tuXJYLSlelnkTmVFu4M9/7MIYQtFcHpbugAU7UbOfjOiVSVYl2fqgBuJ32JUmRo5Ew==
 
 kind-of@^3.0.2, kind-of@^3.0.3, kind-of@^3.2.0:
   version "3.2.2"
@@ -4839,6 +4847,11 @@ tiny-glob@^0.2.6:
   dependencies:
     globalyzer "^0.1.0"
     globrex "^0.1.1"
+
+tinyqueue@^1.2.2:
+  version "1.2.3"
+  resolved "https://registry.yarnpkg.com/tinyqueue/-/tinyqueue-1.2.3.tgz#b6a61de23060584da29f82362e45df1ec7353f3d"
+  integrity sha512-Qz9RgWuO9l8lT+Y9xvbzhPT2efIUIFd69N7eF7tJ9lnQl0iLj1M7peK7IoUGZL9DJHw9XftqLreccfxcQgYLxA==
 
 tmp@^0.0.33:
   version "0.0.33"

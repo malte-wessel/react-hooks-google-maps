@@ -6,12 +6,15 @@ export type PaneName =
     | 'floatPane';
 
 export interface Cluster {
+    id: number;
     ids: string[];
+    isVisible: boolean;
     position: google.maps.LatLngLiteral;
     bounds: google.maps.LatLngBoundsLiteral;
 }
 
 export interface Clusterable<T> {
+    isClustered: boolean;
     isVisible: boolean;
     position: google.maps.LatLngLiteral;
     item: T;
