@@ -1,14 +1,24 @@
 import { useEffect } from 'react';
+import { useCurrent } from './useCurrent';
 
-// eslint-disable-next-line @typescript-eslint/no-explicit-any
-export const useGoogleMapsEvent = <T extends (...args: any[]) => void>(
-    map: google.maps.Map | null,
+export const useGoogleMapsEvent = <T extends (...args: unknown[]) => void>(
+    target: object | null,
     eventName: string,
-    handler?: T
+    callback?: T
 ): void => {
+    const callbackRef = useCurrent(callback);
+    const hasCallback = !!callback;
     useEffect(() => {
-        if (!map || !handler) return;
-        const listener = google.maps.event.addListener(map, eventName, handler);
-        return (): void => google.maps.event.removeListener(listener);
-    }, [map, handler, eventName]);
+        if (!target || !hasCallback) return;
+        const handler = (...args: unknown[]) => {
+            if (!callbackRef.current) return;
+            callbackRef.current(...args);
+        };
+        const listener = google.maps.event.addListener(
+            target,
+            eventName,
+            handler
+        );
+        return () => google.maps.event.removeListener(listener);
+    }, [target, eventName, hasCallback, callbackRef]);
 };

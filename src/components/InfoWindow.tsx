@@ -85,6 +85,9 @@ const InfoWindow: FC<InfoWindowProps> = (props) => {
     useEffect(() => {
         if (!map) return;
         infoWindow.setContent(container);
+        return () => {
+            infoWindow.close();
+        };
     }, [container, infoWindow, map]);
 
     useEffect(() => {
@@ -108,11 +111,11 @@ const InfoWindow: FC<InfoWindowProps> = (props) => {
         }
     }, [infoWindow, map, open]);
 
-    useGoogleMapsEvent(map, 'closeclick', onCloseClick);
-    useGoogleMapsEvent(map, 'content_changed', onContentChanged);
-    useGoogleMapsEvent(map, 'domready', onDomReady);
-    useGoogleMapsEvent(map, 'position_changed', onPositionChanged);
-    useGoogleMapsEvent(map, 'zindex_changed', onZIndexChanged);
+    useGoogleMapsEvent(infoWindow, 'closeclick', onCloseClick);
+    useGoogleMapsEvent(infoWindow, 'content_changed', onContentChanged);
+    useGoogleMapsEvent(infoWindow, 'domready', onDomReady);
+    useGoogleMapsEvent(infoWindow, 'position_changed', onPositionChanged);
+    useGoogleMapsEvent(infoWindow, 'zindex_changed', onZIndexChanged);
 
     // Render children into the container, when ready
     return createPortal(children, container);

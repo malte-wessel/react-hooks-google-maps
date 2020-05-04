@@ -21,6 +21,8 @@ const getInstance = (options?: google.maps.MapOptions, pooling?: boolean) => {
 };
 
 const allocateInstance = (map: google.maps.Map) => {
+    // just in case handlers were added manually and not cleaned up
+    google.maps.event.clearInstanceListeners(map);
     pool.push(map);
 };
 
@@ -40,7 +42,8 @@ export const useMap = (apiKey: string, options: UseMapOptions = {}) => {
     useEffect(() => {
         if (!map || !pooling) return;
         return () => allocateInstance(map);
-    });
+        // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, [map]);
 
     return map;
 };
