@@ -1,11 +1,13 @@
 module.exports = {
     title: 'Google Maps with React hooks',
     tagline: 'A Google Maps integration built with and for React hooks',
-    url: 'https://your-docusaurus-test-site.com',
-    baseUrl: '/',
+    url: 'https://malte-wessel.github.io.',
+    baseUrl: '/react-hooks-google-maps/',
     favicon: 'img/favicon.ico',
-    organizationName: 'malte-wessel', // Usually your GitHub org/user name.
-    projectName: 'react-hooks-google-maps', // Usually your repo name.
+
+    organizationName: 'malte-wessel',
+    projectName: 'react-hooks-google-maps',
+
     themeConfig: {
         disableDarkMode: true,
         prism: {
