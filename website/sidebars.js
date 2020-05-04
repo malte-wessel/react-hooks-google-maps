@@ -1,5 +1,5 @@
 module.exports = {
     docs: {
-        Documentation: ['overview', 'markers', 'clustering'],
+        Documentation: ['overview', 'markers', 'info-window', 'clustering'],
     },
 };
