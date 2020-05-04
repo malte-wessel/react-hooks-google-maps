@@ -5,11 +5,12 @@ import { useGoogleMapsEvent } from '../hooks/useGoogleMapsEvent';
 
 const defaultCenter = { lat: 0, lng: 0 };
 const defaultZoom = 8;
-const defaultStyle = { width: '100%', height: '100%' };
+const defaultStyle = { width: '100%', height: 500 };
 
 export interface GoogleMapProps {
     children?: ReactNode;
     style?: CSSProperties;
+    className?: string;
     map: google.maps.Map | null;
     options?: google.maps.MapOptions;
     center?: google.maps.LatLngLiteral;
@@ -40,7 +41,8 @@ const GoogleMap: FC<GoogleMapProps> = ({
     map,
     center = defaultCenter,
     zoom = defaultZoom,
-    style = defaultStyle,
+    style,
+    className,
     options,
     onClick,
     onDrag,
@@ -90,7 +92,8 @@ const GoogleMap: FC<GoogleMapProps> = ({
     useEffect(() => {
         if (!map || !center) return;
         map.setCenter(center);
-    }, [map, center]);
+        // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, [map, center.lat, center.lng]);
 
     // Register google maps specific events
     useGoogleMapsEvent(map, 'click', onClick);
@@ -119,7 +122,11 @@ const GoogleMap: FC<GoogleMapProps> = ({
     }, [map, onLoad]);
 
     return (
-        <div style={style} ref={ref}>
+        <div
+            className={className}
+            style={!className && !style ? defaultStyle : style}
+            ref={ref}
+        >
             {map && (
                 <MapContext.Provider value={map}>
                     {children}

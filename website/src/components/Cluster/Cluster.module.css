@@ -1,0 +1,9 @@
+.container {
+    padding: 5px;
+    border-radius: 100px;
+    background-color: blue;
+    color: #fff;
+    font-weight: bold;
+    font-size: 10px;
+    transform: 'translate(-50%, -50%)';
+}

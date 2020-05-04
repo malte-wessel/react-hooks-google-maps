@@ -1,4 +1,5 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useRef } from 'react';
+import { useIsMounted } from './useIsMounted';
 
 const initiCallbackName = 'googleMapsInitCallback';
 const initCallbacks: Function[] = [];
@@ -37,9 +38,13 @@ const loadMapsApi = (apiKey: string): Promise<void> =>
 
 export const useLoadMapsApi = (apiKey: string): boolean => {
     const [isLoaded, setIsLoaded] = useState(isMapsApiLoaded);
+    const isMounted = useIsMounted();
     useEffect(() => {
         if (isMapsApiLoaded) return;
-        loadMapsApi(apiKey).then(() => setIsLoaded(true));
-    }, [apiKey]);
+        loadMapsApi(apiKey).then(() => {
+            if (!isMounted()) return;
+            setIsLoaded(true);
+        });
+    }, [apiKey, isMounted]);
     return isLoaded;
 };
