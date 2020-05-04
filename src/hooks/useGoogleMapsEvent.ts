@@ -1,7 +1,8 @@
 import { useEffect } from 'react';
 import { useCurrent } from './useCurrent';
 
-export const useGoogleMapsEvent = <T extends (...args: unknown[]) => void>(
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
+export const useGoogleMapsEvent = <T extends (...args: any[]) => void>(
     target: object | null,
     eventName: string,
     callback?: T
