@@ -6,6 +6,55 @@ title: Clustering
 import { Clustering } from '../src/examples/Clustering';
 import { Wrapper } from '../src/components/Wrapper';
 
+```tsx
+import {
+    useMap,
+    useClusterer,
+    GoogleMap,
+    OverlayView,
+} from 'react-hooks-google-maps';
+import { cities, City } from './data';
+
+const clustererOptions = {
+    getId: (city: City) => String(city.id),
+    getPosition: (city: City) => city.position,
+};
+
+const App = () => {
+    const map = useMap(GOOGLE_MAPS_KEY);
+    const { clusters, items } = useClusterer(map, cities, clustererOptions);
+    return (
+        <GoogleMap zoom={2} map={map}>
+            {items.map(
+                ({ item, position, isVisible, isClustered }) =>
+                    isVisible &&
+                    !isClustered && (
+                        <OverlayView
+                            paneName="floatPane"
+                            position={position}
+                            key={item.id}
+                        >
+                            <CustomMarker />
+                        </OverlayView>
+                    )
+            )}
+            {clusters.map(
+                ({ position, ids, isVisible }, idx) =>
+                    isVisible && (
+                        <OverlayView
+                            paneName="floatPane"
+                            position={position}
+                            key={idx}
+                        >
+                            <Cluster>{ids.length}</Cluster>
+                        </OverlayView>
+                    )
+            )}
+        </GoogleMap>
+    );
+};
+```
+
 <Wrapper>
     <Clustering />
 </Wrapper>
