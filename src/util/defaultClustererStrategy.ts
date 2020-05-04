@@ -51,7 +51,7 @@ export const defaultClustererStrategy = <T>(
             const isVisible = bounds.contains(position);
 
             // Skip if item already belongs to a cluster
-            if (!added[itemId] && isVisible) {
+            if (!added[itemId]) {
                 const candidates = around(
                     tree,
                     position.lng,
