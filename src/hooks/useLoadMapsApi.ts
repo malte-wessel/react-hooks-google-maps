@@ -1,4 +1,4 @@
-import { useState, useEffect, useRef } from 'react';
+import { useState, useEffect } from 'react';
 import { useIsMounted } from './useIsMounted';
 
 const initiCallbackName = 'googleMapsInitCallback';
