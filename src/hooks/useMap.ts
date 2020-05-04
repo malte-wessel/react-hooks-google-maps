@@ -21,8 +21,6 @@ const getInstance = (options?: google.maps.MapOptions, pooling?: boolean) => {
 };
 
 const allocateInstance = (map: google.maps.Map) => {
-    // just in case handlers were added manually and not cleaned up
-    google.maps.event.clearInstanceListeners(map);
     pool.push(map);
 };
 
