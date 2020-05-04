@@ -20,6 +20,13 @@
         "react": "../node_modules/react",
         "react-dom": "../node_modules/react-dom"
     },
+    "engines": {
+        "node": ">=10"
+    },
+    "volta": {
+        "node": "13.8.0",
+        "yarn": "1.22.0"
+    },
     "browserslist": {
         "production": [
             ">0.2%",
