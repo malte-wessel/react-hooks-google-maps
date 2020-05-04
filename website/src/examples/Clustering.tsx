@@ -11,7 +11,7 @@ const clustererOptions = {
 };
 
 export const Clustering = () => {
-    const map = useMap(GOOGLE_MAPS_KEY);
+    const map = useMap(GOOGLE_MAPS_KEY, { pooling: true });
     const { clusters, items } = useClusterer(map, cities, clustererOptions);
     useEffect(() => {
         if (!map) return;

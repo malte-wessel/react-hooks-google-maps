@@ -70,6 +70,7 @@ const GoogleMap: FC<GoogleMapProps> = ({
         const { current: root } = ref;
         if (!map || !root) return;
         const container = map.getDiv();
+        if (!container) return;
         root.appendChild(container);
         return (): void => {
             root.removeChild(container);

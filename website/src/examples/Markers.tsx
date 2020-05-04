@@ -8,7 +8,7 @@ const duesseldorf = {
 };
 
 export const Markers: FC = () => {
-    const map = useMap(GOOGLE_MAPS_KEY);
+    const map = useMap(GOOGLE_MAPS_KEY, { pooling: true });
     return (
         <GoogleMap zoom={13} center={duesseldorf} map={map}>
             <Marker position={duesseldorf} />
