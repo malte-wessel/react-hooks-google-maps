@@ -12,12 +12,12 @@ import { createOverlayView } from '../util/createOverlayView';
 
 export interface OverlayViewProps {
     position: google.maps.LatLngLiteral;
-    paneName: PaneName;
+    paneName?: PaneName;
     children?: ReactNode;
 }
 
 const OverlayView = forwardRef<HTMLDivElement, OverlayViewProps>(
-    ({ position, paneName, children }, ref) => {
+    ({ position, paneName = 'floatPane', children }, ref) => {
         const map = useMapContext();
 
         // Create a container for the OverlayView instance
