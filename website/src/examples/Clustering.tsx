@@ -10,7 +10,7 @@ const clustererOptions = {
     getPosition: (city) => city.position,
 };
 
-export const Clustering = () => {
+const App = () => {
     const map = useMap(GOOGLE_MAPS_KEY, { pooling: true });
     const { clusters, items } = useClusterer(map, cities, clustererOptions);
     useEffect(() => {
@@ -23,19 +23,6 @@ export const Clustering = () => {
     }, [map]);
     return (
         <GoogleMap zoom={2} map={map}>
-            {items.map(
-                ({ item, position, isVisible, isClustered }) =>
-                    isVisible &&
-                    !isClustered && (
-                        <OverlayView
-                            paneName="floatPane"
-                            position={position}
-                            key={item.id}
-                        >
-                            <CustomMarker />
-                        </OverlayView>
-                    )
-            )}
             {clusters.map(
                 ({ position, ids, isVisible }, idx) =>
                     isVisible && (
@@ -48,6 +35,21 @@ export const Clustering = () => {
                         </OverlayView>
                     )
             )}
+            {items.map(
+                ({ item, position, isVisible, isClustered }) =>
+                    isVisible &&
+                    !isClustered && (
+                        <OverlayView
+                            paneName="floatPane"
+                            position={position}
+                            key={item.id}
+                        >
+                            <CustomMarker>{item.name}</CustomMarker>
+                        </OverlayView>
+                    )
+            )}
         </GoogleMap>
     );
 };
+
+export default App;

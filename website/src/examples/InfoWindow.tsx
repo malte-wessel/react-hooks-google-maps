@@ -22,7 +22,7 @@ const altstadt = {
     lng: 6.7710508,
 };
 
-export const Example = () => {
+const App = () => {
     const map = useMap(GOOGLE_MAPS_KEY, { pooling: true });
     const [isOpen, setIsOpen] = useState(false);
     const [time, setTime] = useState(new Date());
@@ -52,3 +52,5 @@ export const Example = () => {
         </GoogleMap>
     );
 };
+
+export default App;

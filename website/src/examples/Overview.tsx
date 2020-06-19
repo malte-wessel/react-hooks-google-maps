@@ -7,7 +7,9 @@ const duesseldorf = {
     lng: 6.77616,
 };
 
-export const Overview = () => {
+const App = () => {
     const map = useMap(GOOGLE_MAPS_KEY, { pooling: true });
     return <GoogleMap zoom={13} center={duesseldorf} map={map} />;
 };
+
+export default App;

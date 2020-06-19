@@ -1,9 +1,47 @@
 .container {
-    padding: 5px;
-    border-radius: 100px;
-    background-color: red;
-    color: #fff;
+    cursor: pointer;
+    transform: translate(-50%, -100%);
+}
+
+.content {
+    background-color: #1c1e21;
+    border: 1px solid #fff;
+    border-radius: 3px;
+    font-size: 0.7rem;
     font-weight: bold;
-    font-size: 10px;
-    transform: 'translate(-50%, -50%)';
+    padding: 0.5em;
+    color: #fff;
+    min-width: 25px;
+    text-align: center;
+    white-space: nowrap;
+}
+
+.nose {
+    border-radius: 100%;
+    height: 6px;
+    width: 1.5em;
+    margin: 3px auto 0;
+    background-color: rgba(0, 0, 0, 0.25);
+}
+
+.nose::before,
+.nose::after {
+    content: '';
+    height: 0;
+    width: 0;
+    position: absolute;
+    border: 6px solid #fff;
+    border-color: #fff transparent transparent transparent;
+    border-width: 6px 6px 0;
+    margin-left: -6px;
+    left: 50%;
+}
+
+.nose::before {
+    margin-top: -3px;
+}
+
+.nose::after {
+    margin-top: -4px;
+    border-color: #1c1e21 transparent transparent;
 }
