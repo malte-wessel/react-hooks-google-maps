@@ -1,7 +1,7 @@
 {
     "name": "react-hooks-google-maps",
     "author": "Malte Wessel",
-    "version": "0.1.4",
+    "version": "0.2.0",
     "license": "MIT",
     "main": "dist/index.js",
     "module": "dist/react-hooks-google-maps.esm.js",
