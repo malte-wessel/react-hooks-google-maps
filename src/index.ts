@@ -6,4 +6,6 @@ export { default as InfoWindow } from './components/InfoWindow';
 export { useMap } from './hooks/useMap';
 export { useClusterer } from './hooks/useClusterer';
 
+export { createDefaultClustererStrategy } from './util/defaultClustererStrategy';
+
 export * from './types';

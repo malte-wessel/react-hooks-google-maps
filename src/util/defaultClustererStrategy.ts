@@ -27,12 +27,19 @@ const ZOOM_TABLE: number[] = [
     0.001,
 ];
 
-export const defaultClustererStrategy = <T>(
+interface DefaultClustererStrategyOptions {
+    zoomTable?: number[];
+}
+
+export const createDefaultClustererStrategy = (
+    options: DefaultClustererStrategyOptions = {}
+) => <T>(
     map: google.maps.Map,
     tree: KDBush<T>,
     getId: (item: T) => string,
     getPosition: (item: T) => google.maps.LatLngLiteral
 ): ClusterStrategyResult<T> => {
+    const { zoomTable = ZOOM_TABLE } = options;
     const items = tree.points;
     const clusters: Cluster[] = [];
     const clusterables: Clusterable<T>[] = new Array(items.length);
@@ -41,7 +48,7 @@ export const defaultClustererStrategy = <T>(
     const zoom = map.getZoom();
 
     if (bounds && zoom) {
-        const distance = ZOOM_TABLE[zoom];
+        const distance = zoomTable[zoom];
         const added: Record<string, true> = {};
 
         for (let i = 0, il = items.length; i < il; i++) {

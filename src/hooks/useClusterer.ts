@@ -1,7 +1,7 @@
 import { useMemo, useState, useCallback, useEffect } from 'react';
 import KDBush from 'kdbush';
 
-import { defaultClustererStrategy } from '../util/defaultClustererStrategy';
+import { createDefaultClustererStrategy } from '../util/defaultClustererStrategy';
 import { Cluster, Clusterable, UseClustererOptions } from '../types';
 import { useGoogleMapsEvent } from './useGoogleMapsEvent';
 import { useCurrent } from './useCurrent';
@@ -30,20 +30,21 @@ export const useClusterer = <T>(
         );
     }, [items, optionsRef]);
 
+    const strategy = useMemo(
+        () => options.strategy || createDefaultClustererStrategy(),
+        [options.strategy]
+    );
+
     // Runs clustering algorithm and updates state
     const update = useCallback(() => {
         if (!map) return;
-        const {
-            getId,
-            getPosition,
-            strategy = defaultClustererStrategy,
-        } = optionsRef.current;
+        const { getId, getPosition } = optionsRef.current;
         const result = strategy(map, tree, getId, getPosition);
         setState({
             clusters: result.clusters,
             clusterables: result.items,
         });
-    }, [map, tree, optionsRef]);
+    }, [map, optionsRef, strategy, tree]);
 
     useEffect(() => {
         update();
