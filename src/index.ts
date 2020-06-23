@@ -2,6 +2,7 @@ export { default as GoogleMap } from './components/GoogleMap';
 export { default as OverlayView } from './components/OverlayView';
 export { default as Marker } from './components/Marker';
 export { default as InfoWindow } from './components/InfoWindow';
+export { default as Circle } from './components/Circle';
 
 export { useMap } from './hooks/useMap';
 export { useClusterer } from './hooks/useClusterer';

@@ -1,0 +1,31 @@
+---
+id: circle
+title: Circle
+---
+
+import { Wrapper } from '../src/components/Wrapper';
+import Example from '../src/examples/Circle';
+
+## Adding markers
+
+```jsx
+import { useMap, GoogleMap, Marker } from 'react-hooks-google-maps';
+
+const duesseldorf = {
+    lat: 51.22172,
+    lng: 6.77616,
+};
+
+const App: FC = () => {
+    const map = useMap(GOOGLE_MAPS_KEY);
+    return (
+        <GoogleMap zoom={13} center={duesseldorf} map={map}>
+            <Marker position={duesseldorf} />
+        </GoogleMap>
+    );
+};
+```
+
+<Wrapper>
+    <Example />
+</Wrapper>

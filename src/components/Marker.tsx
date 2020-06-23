@@ -196,17 +196,17 @@ const Marker: FC<MarkerProps> = (props) => {
     }, [marker, animation]);
 
     useEffect(() => {
-        if (!clickable) return;
+        if (clickable === undefined) return;
         marker.setClickable(clickable);
     }, [marker, clickable]);
 
     useEffect(() => {
-        if (!cursor) return;
+        if (cursor === undefined) return;
         marker.setCursor(cursor);
     }, [marker, cursor]);
 
     useEffect(() => {
-        if (!draggable) return;
+        if (draggable === undefined) return;
         marker.setDraggable(draggable);
     }, [marker, draggable]);
 
@@ -241,12 +241,12 @@ const Marker: FC<MarkerProps> = (props) => {
     }, [marker, title]);
 
     useEffect(() => {
-        if (!visible) return;
+        if (visible === undefined) return;
         marker.setVisible(visible);
     }, [marker, visible]);
 
     useEffect(() => {
-        if (!zIndex) return;
+        if (zIndex === undefined) return;
         marker.setZIndex(zIndex);
     }, [marker, zIndex]);
 

@@ -6,6 +6,7 @@ module.exports = {
             'info-window',
             'overlay-view',
             'clustering',
+            'circle',
         ],
     },
 };
