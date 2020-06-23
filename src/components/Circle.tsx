@@ -152,6 +152,11 @@ const Circle: FC<CircleProps> = (props) => {
     }, [circle, center]);
 
     useEffect(() => {
+        if (radius === undefined) return;
+        circle.setRadius(radius);
+    }, [circle, radius]);
+
+    useEffect(() => {
         if (draggable === undefined) return;
         circle.setDraggable(draggable);
     }, [circle, draggable]);
