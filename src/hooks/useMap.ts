@@ -26,11 +26,12 @@ const allocateInstance = (map: google.maps.Map) => {
 
 export interface UseMapOptions extends google.maps.MapOptions {
     pooling?: boolean;
+    libraries?: string[];
 }
 
 export const useMap = (apiKey: string, options: UseMapOptions = {}) => {
-    const { pooling, ...googleMapOptions } = options;
-    const isReady = useLoadMapsApi(apiKey);
+    const { pooling, libraries, ...googleMapOptions } = options;
+    const isReady = useLoadMapsApi(apiKey, libraries);
     const map = useMemo(() => {
         if (!isReady) return null;
         return getInstance(googleMapOptions, pooling);

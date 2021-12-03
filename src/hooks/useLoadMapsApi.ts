@@ -14,37 +14,46 @@ if (typeof window !== 'undefined') {
     };
 }
 
-const getMapsApiSource = (apiKey: string): string =>
-    `https://maps.googleapis.com/maps/api/js?key=${apiKey}&callback=${initiCallbackName}`;
+const getMapsApiSource = (apiKey: string, libraries?: string[]): string =>
+    `https://maps.googleapis.com/maps/api/js?key=${apiKey}&callback=${initiCallbackName}${
+        libraries && libraries.length ? `&libraries=${libraries.join(',')}` : ''
+    }`;
 
-const createMapsApiScript = (apiKey: string): HTMLScriptElement => {
+const createMapsApiScript = (
+    apiKey: string,
+    libraries?: string[]
+): HTMLScriptElement => {
     const script = document.createElement('script');
-    script.src = getMapsApiSource(apiKey);
+    script.src = getMapsApiSource(apiKey, libraries);
     script.async = true;
     script.defer = true;
     return script;
 };
 
-const loadMapsApi = (apiKey: string): Promise<void> =>
+const loadMapsApi = (apiKey: string, libraries?: string[]): Promise<void> =>
     new Promise((resolve) => {
         if (isMapsApiLoaded) return resolve();
         initCallbacks.push(resolve);
         if (!isMapsApiLoading) {
             isMapsApiLoading = true;
-            const script = createMapsApiScript(apiKey);
+            const script = createMapsApiScript(apiKey, libraries);
             document.body.appendChild(script);
         }
     });
 
-export const useLoadMapsApi = (apiKey: string): boolean => {
+export const useLoadMapsApi = (
+    apiKey: string,
+    libraries: string[] = []
+): boolean => {
     const [isLoaded, setIsLoaded] = useState(isMapsApiLoaded);
     const isMounted = useIsMounted();
     useEffect(() => {
         if (isMapsApiLoaded) return;
-        loadMapsApi(apiKey).then(() => {
+        loadMapsApi(apiKey, libraries).then(() => {
             if (!isMounted()) return;
             setIsLoaded(true);
         });
-    }, [apiKey, isMounted]);
+        // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, [apiKey, isMounted, JSON.stringify(libraries)]);
     return isLoaded;
 };
